@@ -1,12 +1,17 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Cookie, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db import get_db
-from app.deps import get_player_id
+from app.deps import COOKIE_NAME, get_player_id
 from app.schemas import GameStateOut, HitOut
 from app.services import get_or_create_state, hit_boss
 
 router = APIRouter(prefix="/game", tags=["game"])
+
+
+@router.get("/session")
+async def session(player_id: str | None = Cookie(default=None, alias=COOKIE_NAME)):
+    return {"has_player": bool(player_id and len(player_id) >= 32)}
 
 
 @router.get("", response_model=GameStateOut)

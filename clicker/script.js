@@ -79,6 +79,69 @@ function load() {
     });
 }
 
+var cookieWall = document.getElementById("cookie-wall");
+var cookieYes = document.getElementById("cookie-yes");
+var cookieNo = document.getElementById("cookie-no");
+var cookieActions = document.getElementById("cookie-actions");
+
+function acceptCookies() {
+  cookieWall.classList.remove("show");
+  document.body.classList.remove("game-locked");
+  load();
+}
+
+function moveNoBtn() {
+  var w = cookieActions.clientWidth - cookieNo.offsetWidth;
+  var h = cookieActions.clientHeight - cookieNo.offsetHeight;
+  if (w < 0) w = 0;
+  if (h < 0) h = 0;
+  cookieNo.style.left = (Math.random() * w) + "px";
+  cookieNo.style.top = (Math.random() * h) + "px";
+}
+
+function showCookieWall() {
+  document.body.classList.add("game-locked");
+  cookieWall.classList.add("show");
+  cookieNo.style.position = "absolute";
+  cookieNo.style.right = "auto";
+
+  cookieYes.onclick = acceptCookies;
+
+  cookieNo.onmouseenter = moveNoBtn;
+  cookieNo.onclick = function (e) {
+    e.preventDefault();
+    moveNoBtn();
+  };
+
+  document.addEventListener("mousemove", function (e) {
+    if (!cookieWall.classList.contains("show")) return;
+    var r = cookieNo.getBoundingClientRect();
+    var cx = r.left + r.width / 2;
+    var cy = r.top + r.height / 2;
+    if (Math.hypot(e.clientX - cx, e.clientY - cy) < 70) {
+      moveNoBtn();
+    }
+  });
+}
+
+function initCookieWall() {
+  fetch(API + "/api/game/session", { credentials: "same-origin" })
+    .then(function (r) {
+      if (!r.ok) throw new Error("bad status");
+      return r.json();
+    })
+    .then(function (data) {
+      if (data.has_player) {
+        load();
+        return;
+      }
+      showCookieWall();
+    })
+    .catch(function () {
+      showCookieWall();
+    });
+}
+
 boss.onclick = function (e) {
   if (loading || hp <= 0) return;
 
@@ -112,4 +175,4 @@ boss.onclick = function (e) {
     });
 };
 
-load();
+initCookieWall();
