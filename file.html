@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">       
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Website</title>
+        <link rel="stylesheet" href="file.css">
+    </head>
+    <body>
+    <div class="container">
+        <header>
+            <h1>Sign In</h1>
+        </header>    
+            <div class = 'form-container'>
+                <form action="/submit" method="post">
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required><br>
+                    <label for="surname">Surname:</label><br>
+                    <input type="text" id="surname" name="surname" placeholder="Enter your surname" required><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required><br>
+                    <div class="submit">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label><br>
+                        <input type="submit" id="submit-btn" value="Submit">
+                    </div>
+                </form>
+            </div>
+    </div>
+    </body>
+    <script src="file.js"></script>
+</html>
