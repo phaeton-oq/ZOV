@@ -1,0 +1,11 @@
+.venv
+__pycache__
+*.pyc
+.git
+.github-token
+.env
+*.db
+push.ps1
+setup-github.ps1
+Tooltips.md
+.cursor

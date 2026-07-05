@@ -17,12 +17,16 @@ env/
 .env
 .env.*
 
+# Local database
+*.db
+
 # GitHub token (local only)
 .github-token
 
 # Local git automation scripts
 push.ps1
 setup-github.ps1
+Tooltips.md
 
 # Distribution / packaging
 dist/
