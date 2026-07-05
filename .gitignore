@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+
+# Environment variables
+.env
+.env.*
+
+# GitHub token (local only)
+.github-token
+
+# Local git automation scripts
+push.ps1
+setup-github.ps1
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
